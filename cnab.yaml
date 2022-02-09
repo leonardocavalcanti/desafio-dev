@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: CNAB API
+  description: CNAB files importer and viewer.
+  contact:
+    name: Leonardo Cavalcanti
+    email: leonardo.cavalcanti91@hotmail.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  version: 0.1.0
+servers:
+  - url: http://localhost:{port}
+tags:
+  - name: Authentication
+    description: Auth routes, powered by Next-Auth.js
+    externalDocs:
+      url: http://next-auth.js.org/
+  - name: Transactions
+    description: Create and list transactions
+
+paths:
+  /api/auth/signin:
+    get:
+      description: Displays the sign in page.
+      summary: Displays the sign in page
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/signin/:provider:
+    post:
+      description: Starts an OAuth signin flow for the specified provider. The POST submission requires CSRF token from /api/auth/csrf.
+      summary: Starts an OAuth signin flow for the specified provider
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/callback/:provider:
+    get:
+      description: Handles returning requests from OAuth services during sign in. For OAuth 2.0 providers that support the state option, the value of the state parameter is checked against the one that was generated when the sign in flow was started - this uses a hash of the CSRF token which MUST match for both the POST and GET calls during sign in.
+      summary: Handles returning requests from OAuth services
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/signout:
+    get:
+      description: Displays the sign out page.
+      summary: Displays the sign out page
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+    post:
+      description: Handles signing out - this is a POST submission to prevent malicious links from triggering signing a user out without their consent. Handles signing out - this is a POST submission to prevent malicious links from triggering signing a user out without their consent.
+      summary: Handles signing out
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/session:
+    get:
+      description: Returns client-safe session object - or an empty object if there is no session. The contents of the session object that is returned are configurable with the session callback.
+      summary: Returns client-safe session object
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/csrf:
+    get:
+      description: Returns object containing CSRF token. In NextAuth.js, CSRF protection is present on all authentication routes. It uses the "double submit cookie method", which uses a signed HttpOnly, host-only cookie. The CSRF token returned by this endpoint must be passed as form variable named csrfToken in all POST submissions to any API endpoint.
+      summary: Returns object containing CSRF token
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/auth/providers:
+    get:
+      description: Returns a list of configured OAuth services and details (e.g. sign in and callback URLs) for each service. It can be used to dynamically generate custom sign up pages and to check what callback URLs are configured for each OAuth provider that is configured.
+      summary: Returns configured OAuth services
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Authentication
+  /api/transactions:
+    get:
+      description: Lists all the transactinos for the current user
+      summary: List user transactions
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Transactions
+    post:
+      description: Adds a new transaction for the current user.
+      summary: Adds a new transaction
+      responses:
+        '200':
+          description: Expected response to a valid request
+      tags:
+        - Transactions
