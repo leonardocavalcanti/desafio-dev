@@ -1,6 +1,6 @@
 # CNAB importer and viewer
 
-This is a simple ReactJS + NextJS (and NextAuth to handle authentication) + PostgreSQL app to import and view CNAB files data, following the specs described below.
+This is a simple ReactJS + NextJS (and NextAuth to handle authentication) + PostgreSQL ([Demo](https://cnab-viewer.herokuapp.com/)) app to import and view CNAB files data, following the specs described below.
 
 ## Documentação do CNAB
 
