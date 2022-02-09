@@ -22,6 +22,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { useDropzone } from 'react-dropzone';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 dayjs.extend(customParseFormat);
 
@@ -66,6 +75,8 @@ const rejectStyle = {
 };
 
 export default function Home() {
+  const classes = useStyles();
+
   const router = useRouter();
 
   const [session, loading] = useSession();
@@ -173,7 +184,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!transactions) return;
+    if (!transactions || !transactions.length) return;
 
     setTotalIncoming(getTotal(true));
     setTotalOutgoing(getTotal(false));
@@ -199,7 +210,9 @@ export default function Home() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Backdrop open={sendingTransactions}></Backdrop>
+      <Backdrop className={classes.backdrop} open={sendingTransactions}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <section className="container">
         <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
