@@ -29,6 +29,10 @@ This is a simple ReactJS + NextJS (and NextAuth to handle authentication) + Post
 | 8 | Recebimento DOC | Entrada | + |
 | 9 | Aluguel | Saída | - |
 
+# API Documentation
+
+Access the OpenAPI documentation [here](https://editor.swagger.io/?url=https://raw.githubusercontent.com/leonardocavalcanti/desafio-dev/main/cnab.yaml).
+
 # Getting Started locally
 
 To get a local copy up and running, please follow these simple steps.
